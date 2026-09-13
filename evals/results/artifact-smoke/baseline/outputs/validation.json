@@ -1,0 +1,25 @@
+{
+  "phase_1": {
+    "status": "PASS",
+    "checks": [
+      "All three CSV items appear exactly once in source order",
+      "Each quantity and unit price matches source",
+      "Line totals checked against Decimal multiplication",
+      "Grand total matches sum: 670.00",
+      "All seven original input files retain original SHA-256 hashes"
+    ]
+  },
+  "phase_2": {
+    "status": "PASS",
+    "checks": [
+      "Decision and review reference actual stable summary SHA-256",
+      "Local completion and external-release blocker are separately explicit",
+      "Pending approval agrees with authoritative input",
+      "Review correctly labeled self-review",
+      "All evidence references exist",
+      "All original input hashes unchanged including historical review",
+      "Prior claimed output confirmed empty",
+      "Required output JSON files parse successfully"
+    ]
+  }
+}

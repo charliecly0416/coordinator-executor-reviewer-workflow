@@ -1,0 +1,41 @@
+{
+  "state": "blocked_external",
+  "verdict": "HOLD",
+  "reason": "Local preparation and author self-review are complete and pass. External release remains blocked by procurement approval status pending; no approval may be invented.",
+  "local_preparation": {
+    "state": "verified",
+    "verdict": "PASS",
+    "review_type": "self-review"
+  },
+  "external_release_ready": false,
+  "remaining_work": [
+    {
+      "owner": "procurement",
+      "work": "Record approved procurement approval in the authoritative approval record before external release.",
+      "blocks": "external release",
+      "locally_executable": false
+    },
+    {
+      "owner": "future authorized release operator",
+      "work": "Recheck procurement approval and action authorization before any external release.",
+      "blocks": "external release",
+      "locally_executable": false
+    }
+  ],
+  "remaining_authorized_local_work": [],
+  "evidence": [
+    "inputs/requirements.md",
+    "inputs/items.csv",
+    "inputs/approval.json",
+    "inputs/prior_review.json",
+    "inputs/worker_report.json",
+    "inputs/empty_output.txt",
+    "outputs/summary.md",
+    "outputs/release-readiness.md",
+    "outputs/preparation-checks.json",
+    "outputs/validation.json",
+    "outputs/review.md",
+    "outputs/source_hashes.json",
+    "docs/phase-record.md"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "phase": "preparation",
+  "method": "CSV parsing and exact Decimal arithmetic",
+  "item_count": 3,
+  "line_totals": {
+    "A": "240",
+    "B": "270",
+    "C": "160"
+  },
+  "grand_total": "670",
+  "checks_passed": [
+    "Three unique authoritative items retained",
+    "Line totals A=240, B=270, C=160",
+    "Grand total=670"
+  ],
+  "source_hashes": "outputs/source_hashes.json"
+}

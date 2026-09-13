@@ -1,0 +1,21 @@
+{
+  "review_type": "self-review",
+  "reviewed_sha256": {
+    "summary.md": "1acc78a31127209d2ec22ffa55e04055bb49c32e7f9e8dc7aa57f2622d2c9bd8",
+    "release-readiness.md": "aa556a326e2c48fa180803004828df545bcd4c62692e91fe7ace628f3779679a"
+  },
+  "checks_passed": [
+    "Written table retains every authoritative item in source order",
+    "Written quantities and unit prices match CSV",
+    "Each written line total equals quantity times unit price",
+    "Written grand total reconciles to line totals and equals 670",
+    "Release record correctly blocks external release while approval is pending",
+    "All seven input files match baseline SHA-256 hashes",
+    "Claimed worker output is empty and cannot establish completion",
+    "Historical review identifies an earlier source version"
+  ],
+  "limitations": [
+    "No independent reviewer or procurement approver available",
+    "Arithmetic verifies supplied CSV only; currency and external prices are not specified or verified"
+  ]
+}

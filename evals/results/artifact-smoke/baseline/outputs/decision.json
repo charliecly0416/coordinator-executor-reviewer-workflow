@@ -1,0 +1,40 @@
+{
+  "state": "blocked_external",
+  "state_scope": "External release only; all authorized local preparation and correction is complete.",
+  "verdict": "PASS_WITH_CONDITIONS",
+  "verdict_scope": "Self-review passes local summary and release-readiness preparation. External release remains blocked by pending procurement approval.",
+  "reason": "All authoritative items are present with correct quantities, unit prices and totals (670.00). Procurement approval is pending. Historical PASS predates the source update and the prior claimed output is empty.",
+  "local_work_state": "complete",
+  "external_release_ready": false,
+  "approval_status": "pending",
+  "review_type": "self-review",
+  "reviewed_summary_sha256": "b9d3fc7c52477e5ed442342f138afdea1ebc32966337915fc074c2db47fcb46c",
+  "remaining_work": [
+    {
+      "action": "Procurement records approved in authoritative approval.json through its actual approval process.",
+      "owner": "procurement",
+      "blocks": "external release",
+      "authorized_here": false
+    },
+    {
+      "action": "An authorized release owner rechecks recorded approval and current deliverable before any release.",
+      "owner": "release owner",
+      "blocks": "external release",
+      "authorized_here": false
+    }
+  ],
+  "remaining_authorized_local_work": [],
+  "evidence": [
+    "inputs/requirements.md",
+    "inputs/items.csv",
+    "inputs/approval.json",
+    "inputs/prior_review.json",
+    "inputs/worker_report.json",
+    "inputs/empty_output.txt",
+    "outputs/summary.md",
+    "outputs/validation.json",
+    "outputs/input_hashes.json",
+    "outputs/review.md",
+    "docs/phase-record.md"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "inputs/approval.json": "007a9ead4f78f933e85ef0e6997929921ce460731505229bdacc2c9bf31cc46f",
+  "inputs/draft.md": "c194264ea45a079ceb5b89c9cf652f36c68c5d11ab4c61094f80c5dffe406ccf",
+  "inputs/empty_output.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "inputs/items.csv": "04c45faa7aae6416452f3268c5adc3a20ab9ff204cf5f50db153cfd376384eec",
+  "inputs/prior_review.json": "c1e064141384c84fd29dc5e6b5a6c1d4ff603712ea2724a3f5cdbcb988e4ba46",
+  "inputs/requirements.md": "3d85618888d66ff759cf204e5ae75b7da8292823d588cd0e8be3351ad6526965",
+  "inputs/worker_report.json": "f8e87bca7c939bfcd45edd27210f120389f387ef5e03c403776ad3abb552ae44"
+}

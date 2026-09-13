@@ -1,0 +1,42 @@
+{
+  "reads": [
+    "skill/SKILL.md",
+    "inputs/requirements.md",
+    "inputs/items.csv",
+    "inputs/draft.md",
+    "inputs/worker_report.json",
+    "inputs/empty_output.txt",
+    "inputs/prior_review.json",
+    "inputs/approval.json",
+    "outputs/summary.md",
+    "outputs/release-readiness.md",
+    "outputs/source_hashes.json"
+  ],
+  "writes": [
+    "outputs/summary.md",
+    "outputs/release-readiness.md",
+    "outputs/source_hashes.json",
+    "outputs/preparation-checks.json",
+    "outputs/validation.json",
+    "outputs/review.md",
+    "outputs/decision.json",
+    "outputs/activity.json",
+    "docs/phase-record.md"
+  ],
+  "checks": [
+    "Exact Decimal arithmetic from source CSV",
+    "Parsed actual written table and compared required fields to CSV",
+    "Reconciled written grand total",
+    "Checked pending approval against release-readiness statement",
+    "Compared all input SHA-256 hashes against baseline",
+    "Checked zero-byte claimed output and historical review version"
+  ],
+  "actions": [
+    "Listed files only in assigned inputs and applicable AGENTS filename search within assigned workspace",
+    "Created corrected local summary and release-readiness record",
+    "Recorded author self-review, phased evidence and external dependency"
+  ],
+  "external_actions": [],
+  "agents_spawned": 0,
+  "inputs_modified": false
+}
