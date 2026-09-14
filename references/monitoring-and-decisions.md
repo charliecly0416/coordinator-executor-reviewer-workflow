@@ -45,11 +45,15 @@ Avoid “马上给结论”, “这轮必须完成”, “快速 PASS”, or “
 
 ## Route findings, not verdict words
 
+These labels are not session commands. The coordinator remains responsible for the whole objective after routing the finding. Append the routed action to the open work list and continue until that list is empty or a real decision boundary is reached.
+
 - `PASS`: verify scope and version, then continue the next required dependency if one exists.
 - `PASS_WITH_CONDITIONS`: assign each condition an owner and evidence requirement. Only continue work that does not rely on unresolved blocking conditions.
 - `FAIL_NEEDS_REPAIR`: identify the unmet requirement, cause, and concrete correction.
 - `HOLD`: identify the reason. Route a defect to repair, missing evidence to verification, an external dependency to a documented wait, and a needed user decision to safe pause and consultation. Do not rework a correct deliverable merely because approval has not arrived.
 - `STOP`: determine what the coordinator can resolve within authorization and what actually requires user input.
+
+For a reviewer message that ends with a verdict, use this response sequence before yielding: acknowledge the reviewed scope and version, record every condition or finding, assign the next owner, dispatch or resume the next executable action, and report the remaining checklist. A final answer is allowed only after this sequence finds no mandatory item left. “Reviewer returned PASS” is therefore progress evidence, not a completion reason.
 
 A reviewer may disagree with the coordinator. Do not pressure them to soften findings. A verdict has no value without evidence matching the claimed scope.
 

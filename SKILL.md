@@ -100,6 +100,19 @@ When an inquiry is pending, allow a reasonable response window and do useful ind
 
 ## Dispatch-to-Closure Loop
 
+### Coordinator session lifetime
+
+Treat the coordinator session as open for the entire authorized objective. A worker's `PASS`, `PASS_WITH_CONDITIONS`, `HOLD`, `FAIL_NEEDS_REPAIR`, `STOP`, `complete`, or `idle` message is an event about that worker or reviewed version; it is never, by itself, an instruction to end the coordinator session. Translate the event into a decision, update the phase record, and inspect the remaining acceptance checklist.
+
+After every worker or reviewer event, perform this continuation check:
+
+1. Is the assigned deliverable present and reviewed at a named version?
+2. Which mandatory criteria, dependencies, repairs, and reviews remain open?
+3. Is there an active worker, a resumable process, a safe reassignment, or an authorized self-review path for the next item?
+4. Is the overall objective complete, or is there a genuine external/user decision boundary?
+
+If required work remains executable, continue monitoring and dispatch the next action in the same turn. If a worker says `STOP`, determine whether it means “stop this attempt,” “stop this phase,” or “stop the whole objective”; only the last can close the objective, and only when it is authorized and evidenced. End the coordinator session only after the Closure conditions below are satisfied, or when the Unexpected Events section requires yielding to the user. Do not emit a final completion report merely because the latest event says `PASS` or `HOLD`.
+
 Keep a compact phase record: objective, current owner, state, last observation time, evidence references, open findings, and next action. Update it at meaningful transitions; routine polls need not generate new documents.
 
 Use explicit states such as `ready`, `executing`, `awaiting_review`, `reviewing`, `repair_required`, `verified`, `awaiting_user`, `blocked_external`, and `closed`. These states differ from service status and review verdicts.
