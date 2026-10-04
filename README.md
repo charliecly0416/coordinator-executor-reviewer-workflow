@@ -2,51 +2,40 @@
 
 [![skills.sh](https://skills.sh/b/charliecly0416/coordinator-executor-reviewer-workflow)](https://skills.sh/charliecly0416/coordinator-executor-reviewer-workflow)
 
-A general-purpose workflow for carrying an authorized task from assignment through evidence-based review and completion. Applies to technical and nontechnical work.
+A proportionate workflow for carrying an authorized task to a useful, verified result. It supports direct execution, targeted assistance, and independent review of critical deliverables across technical and nontechnical work.
 
-## Use
+## Install
 
-Install the directory as a local skill using your host's supported skill installation mechanism, or give your coordinator the `SKILL.md` file. Preserve its relative `references/` directory. No runtime package, API credential, daemon, or model provider is required by the skill itself.
-
-Install from GitHub with the skills CLI (the repository is the distribution source; no separate npm package is needed):
+Install from GitHub with the skills CLI:
 
 ```bash
 npx skills add charliecly0416/coordinator-executor-reviewer-workflow --skill coordinator-executor-reviewer-workflow
 ```
 
-Add `-g -a codex` for a global Codex installation. Existing CLI-managed installations can be refreshed with `npx skills update coordinator-executor-reviewer-workflow -g`.
+Use `-g -a codex` for a global Codex installation. Refresh a global installation with:
 
-Example request:
+```bash
+npx skills update coordinator-executor-reviewer-workflow -g
+```
 
-> Use coordinator-executor-reviewer-workflow to complete this assignment. Define acceptance criteria, use independent review where required, keep me informed without rushing workers, repair ordinary failures, and ask me before any new authorization or material change of direction.
+## Use
 
-Provide the actual task, constraints, inputs, and definition of done. Choose direct execution, local verification, or independent review of critical deliverables. Ordinary subtasks default to completion and self-check by the current agent, even inside a large project. Apply independent review to the deliverables that need it; use parallel workers only when the benefit exceeds coordination costs.
+> Use coordinator-executor-reviewer-workflow to complete this assignment. Keep ordinary work direct, use independent review where the result requires it, preserve evidence, and stop when the agreed acceptance criteria are met.
 
-## Behavior
+Provide the actual task, constraints, inputs, authorization, and definition of done. The skill selects the smallest sufficient mode for each deliverable. It does not require three agents, a repository, code tests, phase files, or formal reports for ordinary work.
 
-- Keep routine documents and agreed launch commands free of automatic review gates.
-- Reuse unaffected evidence after fixes; bind checks to relevant versions and risks.
-- Scope dependencies to the delivery promise and distinguish environment conditions from device identity.
-- Freeze archive contents before packaging and keep the final acceptance receipt outside the archive.
-- Separate progress updates to the user from requests to workers.
-- Continue authorized work after partial progress; stop safely for a genuine user decision.
-- Route HOLD by its cause instead of automatically rewriting deliverables.
-- Reassess repeated unsuccessful repairs without arbitrary attempt caps.
-- Minimize duplicated context, polling, reports, and verification while preserving evidence.
-- Never treat a service success label or self-review as proof of independent acceptance.
+## Design
 
-## Compatibility
+- Direct tasks are completed and self-checked by the current agent.
+- Assisted tasks receive targeted verification from one executor.
+- Critical deliverables receive independent review against predefined criteria.
+- Findings are classified before repair; optional improvements do not become hidden work.
+- Repairs are small and impact-scoped. The result closes once mandatory criteria pass.
+- Evidence, failures, negative results, authorization boundaries, and portability claims remain truthful.
+- Complex archives freeze their contents before packaging and keep the final acceptance receipt outside the archive.
 
-Use only the host's real tools and status semantics. Progress channels, waiting, interruption, agent reuse, and persistent monitoring are optional capabilities, not guarantees. A host unable to maintain an active task needs a truthful handoff. The skill cannot itself keep a session alive or enforce its instructions mechanically.
+## Validation
 
-`SKILL.md` is the runtime entry point. `references/monitoring-and-decisions.md` is read only when needed. `evals/` and `scripts/validate_skill.py` are maintainer resources; workers need not load them during ordinary tasks.
+Run `python scripts/validate_skill.py` for package checks. Maintainers can run `python scripts/test_trial_checker.py` and `python scripts/check_artifact_trial.py` for evidence-integrity checks. See [evaluation protocol](evals/README.md) and [release validation](RELEASE_VALIDATION.md) for bounded coverage and known limits. Passing these checks does not prove broad model behavior or token savings.
 
-## Validation and limits
-
-Run `python scripts/validate_skill.py` for portable package checks. Maintainers can also run `python scripts/test_trial_checker.py` to exercise rejection of corrupted evidence. This is structural validation, not a test that a model will follow the workflow.
-
-See [evaluation protocol](evals/README.md) and [release validation](RELEASE_VALIDATION.md) for actual tested scope, evidence and known gaps. Do not interpret a passing smoke task as broad reliability or a guarantee of token savings. Review quality depends on the model, tools, inputs, and task.
-
-## Distribution
-
-No independent license grant is added by this package. Before redistributing, confirm that the original material and modifications are covered by an appropriate license from the rights holder or containing repository. No external publication is performed by installing this skill.
+`SKILL.md` is the runtime entry point. The monitoring reference is read only for active delegated work. The `evals/` and `scripts/` directories are maintainer resources.

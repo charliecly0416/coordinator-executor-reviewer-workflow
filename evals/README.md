@@ -1,25 +1,17 @@
 # Evaluation protocol
 
-`evals.json` defines scenarios and expected behavior; definitions are not passed tests. Keep expected outputs and grading criteria out of worker task packets.
+`evals.json` contains scenario definitions and expected behavior. Definitions are not passing tests. Grade the actions and artifacts produced by a worker; do not put the expected answer or optimization rationale in its task packet.
+
+## What to test
+
+The suite covers proportional mode selection, ordinary work inside large projects, meaningful rule changes, independent-review honesty, evidence integrity, authorization boundaries, worker monitoring, partial verdicts, changed inputs, migration conditions, dependency scope, archive receipts, and reuse of unaffected evidence.
+
+Scenarios 31–34 cover the v2.0.0 repair behavior: a direct task closes after self-check, a minor finding does not create a repair phase, a repeated patch without new evidence stops with a truthful boundary, and a blocking defect receives a targeted repair and impact-scoped recheck.
 
 ## Bounded artifact exercise
 
-Use `fixtures/artifact-task/` as read-only inputs. Give each worker an isolated writable `outputs/` directory and either the previous or candidate skill version. Ask it to complete the requirements and produce a checked summary, a release decision, self-review, and an activity record. Do not disclose which file or claim is wrong in the task prompt. No external action is permitted.
+Use `fixtures/artifact-task/` as read-only inputs and an isolated writable output directory. The task requires a reconciled summary, a release decision, and a self-review while preserving inputs, historical evidence, and pending external approval. Check actual files: all source items retained, totals reconciled, false or stale completion claims rejected, approval not invented, and local completion distinguished from release readiness.
 
-Check actual output: all source items retained, line totals and grand total reconciled, false/stale completion claims rejected, required approval not invented, inputs preserved, and local completion distinguished from release readiness. Inspect activity reports against available tool traces; reports alone are not telemetry.
+## Comparisons and limits
 
-## Multi-event coordination tests (additional coverage required)
-
-Exercise healthy silence, overdue checkpoints, worker termination/reuse failure, user cancellation, changed inputs during review, and user authorization while dependent work is paused. Use controlled tool events or recorded tool traces with known state transitions; grade the actions performed, not just an answer stating the rules.
-
-## Comparisons
-
-Use identical inputs and task instructions, isolated outputs, fixed skill snapshots and consistent model/settings. Capture actual deliverables, commands, tool events, observed errors, review findings and usage when the host exposes it. Do not fabricate exact token metrics from word counts. Compare acceptance failures, authorization violations, unnecessary messages/reads and cost jointly. Repeat trials before drawing statistical conclusions; one run per variant is a smoke comparison only.
-
-An independent reviewer should inspect the candidate and trial artifacts without altering them. If the candidate changes after testing, identify affected criteria and repeat the relevant checks. Keep version fingerprints in the release record. Preserve failures instead of silently discarding them.
-
-## Proportionate-workflow scenarios
-
-Cases 23–30 cover direct delivery inside a large project, substantive rule changes hidden in documentation, equivalent-environment migration, final archive receipts, current versus historical dependencies, reuse of unaffected evidence, shared calculation changes, and simple compression. Grade actual actions and outputs when executing these scenarios. Their definitions alone do not establish that they passed.
-
-For a minimal live smoke pass, give an isolated worker confirmed launch facts and request a short launch note, then the existing artifact exercise. Keep expected outcomes and optimization advice out of the task packet. Check the written command against the facts, the actual number of spawned workers and approval waits, and the reconciled artifact outputs. Record model/host limits and distinguish these bounded tasks from unexecuted scenarios such as a real portable archive build.
+Use identical inputs, isolated outputs, fixed skill snapshots, and consistent model settings when comparing revisions. Capture deliverables, tool events, findings, and usage only when the host exposes them. Do not infer exact token savings from word counts. Repeat trials before drawing statistical conclusions. Preserve failures and record which scenarios were not run.

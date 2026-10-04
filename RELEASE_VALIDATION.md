@@ -1,8 +1,25 @@
 # Release validation
 
-## v1.1.0 — 2026-10-04
+## v2.0.0 — 2026-10-04
 
-This revision makes direct execution the default for ordinary subtasks while preserving review requirements for critical deliverables. The maintainer checked coverage against the supplied optimization brief; an independent agent reviewed the runtime instructions without editing them.
+This release is a structural rewrite of the runtime skill. It makes the mode boundary explicit, gives findings a severity and repair policy, and closes accepted work before optional improvements can turn into a second project. It preserves independent review for critical deliverables and the evidence, authorization, migration, and archive rules that protect correctness.
+
+Executed checks:
+
+- `python scripts/validate_skill.py`: package structure, Markdown references, and 34 scenario definitions passed.
+- Codex skill-creator `quick_validate.py`: skill metadata and structure passed.
+- `python scripts/test_trial_checker.py`: all 5 existing evidence-checker tests passed.
+- `python scripts/check_artifact_trial.py`: the saved baseline and candidate artifact outputs still satisfy their integrity checks.
+- `npx --yes skills add . --list`: the CLI discovered exactly one skill with the expected name.
+- The bounded launch-note and artifact smoke outputs from the previous release remain valid under the rewritten acceptance rules; the maintainer rechecked their commands, arithmetic, preserved inputs, pending approval, and self-review labels.
+
+The runtime entry point is 119 lines and the monitoring reference is 39 lines. The expanded scenario definitions remain test specifications, not behavioral passes. No claim is made about statistical reliability, exact token savings, live agent recovery, or archive portability from this validation alone. A fresh behavioral trial should cover the new stop-after-acceptance and repair-triage cases before making such claims.
+
+## Historical validation
+
+### v1.1.0 historical validation
+
+This earlier revision makes direct execution the default for ordinary subtasks while preserving review requirements for critical deliverables. The maintainer checked coverage against the supplied optimization brief; an independent agent reviewed the runtime instructions without editing them.
 
 Executed checks:
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0 — 2026-10-04
+
+- Rewrote the runtime workflow around one closed loop: choose a mode, define acceptance, execute, verify, classify findings, repair only what matters, and close.
+- Added an explicit mode boundary so Direct work stops after its self-check and does not inherit collaboration or monitoring rules.
+- Added blocker/material/minor/optional finding triage, a default targeted repair pass for Direct and Assisted work, and a stop rule for repeated patches without material progress.
+- Kept independent review for critical deliverables, evidence and failure provenance, authorization boundaries, impact-scoped verification, migration semantics, and portable handoff checks.
+- Removed duplicate lifecycle prose, mandatory-looking report patterns, and open-ended continuation language that encouraged bloated deliverables.
+
 ## 1.1.0 — 2026-10-04
 
 - Put direct execution, local verification, and critical-deliverable independent review first; ordinary subtasks do not inherit the full collaboration loop.
