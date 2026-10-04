@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-04",
+  "scope": "One isolated agent performed two bounded local tasks, then a read-only content review against the optimization brief. The maintainer separately checked the generated artifacts.",
+  "artifact_checks": {
+    "complete_reconciled_table": true,
+    "written_total_reconciles": true,
+    "external_dependency_preserved": true,
+    "no_unfinished_local_work": true,
+    "inputs_preserved": true,
+    "self_review_labeled": true,
+    "stale_and_empty_claims_discussed": true
+  },
+  "launch_maintainer_checks": {
+    "command_matches_facts": true,
+    "environment_requirements_preserved": true,
+    "unrelated_review_not_blocking": true,
+    "no_added_device_identity_binding": true
+  },
+  "content_review": {
+    "blocking_findings": [],
+    "runtime_files": [
+      "SKILL.md",
+      "references/monitoring-and-decisions.md"
+    ]
+  },
+  "trial_skill_sha256": "8327eb09ec3b60ac825569968dd054988d4a7bd04285d8381e53d08bd410dd26",
+  "final_runtime_sha256": {
+    "SKILL.md": "42933fab65fc9b89bb76684e7b02325b57b288b5195744989cb524af195db85a",
+    "references/monitoring-and-decisions.md": "6f4636d6713b215876ef8493436a5fa6478450f2fd24dbdf5dbbf556ab85fe9f"
+  },
+  "post_trial_change": "Archive step 5 clarified that simple compression needs no separate receipt unless required. Scoped independent follow-up found no blockers and suggested explicitly requiring receipts for complex result handoffs; the maintainer adopted and checked that suggestion. Unaffected smoke tasks were not rerun.",
+  "artifact_source_sha256": {
+    "approval.json": "007a9ead4f78f933e85ef0e6997929921ce460731505229bdacc2c9bf31cc46f",
+    "draft.md": "c194264ea45a079ceb5b89c9cf652f36c68c5d11ab4c61094f80c5dffe406ccf",
+    "empty_output.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "items.csv": "04c45faa7aae6416452f3268c5adc3a20ab9ff204cf5f50db153cfd376384eec",
+    "prior_review.json": "c1e064141384c84fd29dc5e6b5a6c1d4ff603712ea2724a3f5cdbcb988e4ba46",
+    "requirements.md": "3d85618888d66ff759cf204e5ae75b7da8292823d588cd0e8be3351ad6526965",
+    "worker_report.json": "f8e87bca7c939bfcd45edd27210f120389f387ef5e03c403776ad3abb552ae44"
+  },
+  "limitations": [
+    "One worker, one trial per task; no statistical comparison or token/cost measurement.",
+    "The harness prohibited further delegation and external actions, so absence of subagents is not evidence of autonomous agent-count selection.",
+    "Worker activity descriptions are self-reported, not complete host telemetry.",
+    "Archive portability, equivalent-server migration, and live multi-agent recovery were not executed.",
+    "Scenario definitions in evals.json are not passed behavioral tests."
+  ]
+}

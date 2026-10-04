@@ -8,14 +8,26 @@ A general-purpose workflow for carrying an authorized task from assignment throu
 
 Install the directory as a local skill using your host's supported skill installation mechanism, or give your coordinator the `SKILL.md` file. Preserve its relative `references/` directory. No runtime package, API credential, daemon, or model provider is required by the skill itself.
 
+Install from GitHub with the skills CLI (the repository is the distribution source; no separate npm package is needed):
+
+```bash
+npx skills add charliecly0416/coordinator-executor-reviewer-workflow --skill coordinator-executor-reviewer-workflow
+```
+
+Add `-g -a codex` for a global Codex installation. Existing CLI-managed installations can be refreshed with `npx skills update coordinator-executor-reviewer-workflow -g`.
+
 Example request:
 
 > Use coordinator-executor-reviewer-workflow to complete this assignment. Define acceptance criteria, use independent review where required, keep me informed without rushing workers, repair ordinary failures, and ask me before any new authorization or material change of direction.
 
-Provide the actual task, constraints, inputs, and definition of done. For short tasks, responsibilities can be combined with explicitly labelled self-review unless independence is required. Complex tasks may use several workers when their assignments are independent.
+Provide the actual task, constraints, inputs, and definition of done. Choose direct execution, local verification, or independent review of critical deliverables. Ordinary subtasks default to completion and self-check by the current agent, even inside a large project. Apply independent review to the deliverables that need it; use parallel workers only when the benefit exceeds coordination costs.
 
 ## Behavior
 
+- Keep routine documents and agreed launch commands free of automatic review gates.
+- Reuse unaffected evidence after fixes; bind checks to relevant versions and risks.
+- Scope dependencies to the delivery promise and distinguish environment conditions from device identity.
+- Freeze archive contents before packaging and keep the final acceptance receipt outside the archive.
 - Separate progress updates to the user from requests to workers.
 - Continue authorized work after partial progress; stop safely for a genuine user decision.
 - Route HOLD by its cause instead of automatically rewriting deliverables.

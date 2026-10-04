@@ -1,6 +1,6 @@
 # Monitoring and decision examples
 
-These examples apply across task domains. They illustrate coordination decisions, not a mandatory sequence of deliverables. Cadences are defaults, not deadlines for producing a result. User and host instructions take precedence.
+Read these examples only for delegated work, review decisions, or a useful report format. Direct execution needs none of this ceremony. These examples apply across task domains; they are not a mandatory sequence of deliverables. Cadences are defaults, not deadlines for producing a result. User and host instructions take precedence.
 
 ## Dispatch an outcome
 
@@ -53,13 +53,13 @@ These labels are not session commands. The coordinator remains responsible for t
 - `HOLD`: identify the reason. Route a defect to repair, missing evidence to verification, an external dependency to a documented wait, and a needed user decision to safe pause and consultation. Do not rework a correct deliverable merely because approval has not arrived.
 - `STOP`: determine what the coordinator can resolve within authorization and what actually requires user input.
 
-For a reviewer message that ends with a verdict, use this response sequence before yielding: acknowledge the reviewed scope and version, record every condition or finding, assign the next owner, dispatch or resume the next executable action, and report the remaining checklist. A final answer is allowed only after this sequence finds no mandatory item left. “Reviewer returned PASS” is therefore progress evidence, not a completion reason.
+For a reviewer verdict, check its scope and version and update the existing record with findings that affect remaining work. Resume or dispatch the next executable required action, if any. This does not require a new report, approval file, or another review of routine internal actions. “Reviewer returned PASS” supports closure only when the entire authorized objective is satisfied; a genuine external or user-decision boundary permits a truthful incomplete handoff.
 
 A reviewer may disagree with the coordinator. Do not pressure them to soften findings. A verdict has no value without evidence matching the claimed scope.
 
 ## Repeated repairs
 
-After repeated substantive repair cycles, compare the actual work with the authorized goal and inspect why findings persist. The default checkpoints in the main skill trigger a diagnosis, not a demand to finish immediately.
+After repeated substantive repair cycles, compare the actual work with the authorized goal and inspect why findings persist. Use the task contract and evidence of convergence to choose checkpoints; this workflow adds no fixed retry count or stop quota.
 
 Example of continuing: two reviews find inconsistent totals. The coordinator discovers that workers used different input versions, freezes the correct shared input, and schedules reconciliation again. The goal and authorization remain intact; report the correction and continue.
 
@@ -88,3 +88,13 @@ These require targeted correction or qualification even if a superficial check p
 Record the authoritative task references and their precedence, verified facts separately from earlier claims, current owners, last observed state, evidence versions, authorization, unresolved criteria, and next action.
 
 On resumption, inspect current state: other workers may have changed the deliverable or plan. Preserve their work and do not rely on stale approval. Retain any remaining authorized deliverables in the work list; successful completion of one phase does not complete the entire objective. If the agreed objective is already met, do not invent a downstream workflow.
+
+## Optional report examples
+
+Use only the fields needed by the recipient, preferably in the existing task record. These are not separate files or required forms. A brief result is enough for direct execution.
+
+**Execution:** deliverable and changes; relevant inputs; verification and evidence version; unmet criteria, uncertainty, and next action.
+
+**Review:** verdict and reviewed scope/version; evidence checked; blocking and nonblocking findings; missing evidence and limitations; actionable repairs or conditions, including their owners and dependent work when needed.
+
+A failed review should identify a concrete correction. A user progress update should reuse known status without requesting fresh reports from every worker.

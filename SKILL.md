@@ -5,226 +5,145 @@ description: Coordinate tasks through a coordinator, executor, and reviewer acro
 
 # Coordinator Executor Reviewer Workflow
 
-## Purpose and Scope
+## Choose the Smallest Sufficient Execution Mode
 
-Use three distinct responsibilities to carry an authorized task to a verified outcome:
+Start each task or subtask by asking whether the current agent can complete it directly and self-check. Choose the mode from its actual content, consequences, and existing requirements; do not ask the user to classify routine work.
 
-- **Coordinator:** owns the overall objective, scope, dependencies, monitoring, user communication, and continuation decisions.
-- **Executor:** produces the assigned deliverable and evidence that it meets its requirements.
-- **Reviewer:** independently checks the deliverable against those requirements, reports findings, and recommends next work.
+| Mode | Typical work | Default execution and verification |
+|---|---|---|
+| **Direct execution** | Status queries, routine requests for missing materials, organizing confirmed information, existing launch commands, copying verified files | The coordinator completes and self-checks the work. Check facts, paths, commands, and required files as relevant; the deliverable and a brief result are enough. No automatic subagents. |
+| **Local verification** | Routine code fixes, format conversion, environment preparation for an agreed plan, packaging with real dependencies | One worker, normally the current agent, completes the work and tests the affected scope. Delegate only when useful; independent review needs a concrete risk or existing requirement. |
+| **Independent review of critical deliverables** | Experiment-rule changes, logic affecting scientific results, important conclusions, complex result handoffs, explicitly required independent review | Separate execution from review. Review a stable deliverable and its core evidence; the coordinator accepts the result and routes repairs by impact. |
 
-This framework is domain-neutral. It applies to writing, analysis, planning, design, administrative work, software, and other tasks. It does not prescribe a particular project, roadmap, technology, experiment, or downstream deliverable. Domain instructions come from the actual task and applicable specialist skills.
+File type alone does not determine the mode. An ordinary instruction document can be delivered directly; a document changing evaluation metrics or authorization boundaries needs stronger checks. A simple archive is lightweight; a handoff promising independent recomputation needs dependency and portability verification.
 
-Scale the ceremony to the task. A short assignment can use one deliverable and a concise review; a complex objective may need several phases. Applying the framework does not require a repository, shell process, unit tests, or a separate document for every step. Follow the user's choice of agents, people, or self-execution; distinguish self-review from independent review honestly.
+A top-level request for this framework does **not** require independent approval of every internal action. Identify the deliverables and substantive changes that need independent review at the start. Routine notes, progress queries, path explanations, and summaries of agreed commands do not inherit review gates from the larger project. Continue authorized work that does not depend on a pending review.
 
-### Choose the smallest sufficient execution mode
+Add roles only for substantive work that can proceed independently, a requirement for independent review, or important consequences of an unnoticed error. The benefit must justify dispatch, context transfer, and waiting. Do not create three agents merely to mirror three responsibilities or upgrade a small task because it belongs to a large project.
 
-- **Lightweight:** for a short, low-risk task with no independent-approval requirement, one worker may execute and perform an explicitly labelled self-review. Use a compact task record rather than separate phase documents.
-- **Independent review:** retain a separate reviewer when the user or acceptance contract requires independence, or when the consequence of an unnoticed error justifies it.
-- **Parallel execution:** add workers only for bounded work that can proceed independently with clear ownership. Do not create three agents merely to mirror three responsibilities.
+User requirements and acceptance criteria still apply. If independence is required but unavailable, preserve that gap and use only an authorized fallback. Label an author's check **self-review**; changing role names or making another pass is not independent approval.
 
-The mode is a coordination choice, not permission to weaken acceptance criteria. If independence is required but unavailable, preserve that gap and follow the authorized fallback; never relabel self-review as independent approval.
+For direct execution: read the necessary facts, produce the deliverable, check its accuracy and scope, then deliver it. Do not add execution locks, unrelated review waits, phase files, or renewed authorization for already approved work. The collaboration loop below applies only where delegation or independent review is actually needed.
+
+## Purpose and Responsibilities
+
+Use three responsibilities to carry an authorized task to a verified outcome:
+
+- **Coordinator:** owns the objective, scope, dependencies, assignments when needed, user communication, acceptance, and continuation decisions.
+- **Executor:** produces the assigned deliverable, verifies it appropriately, and reports evidence, gaps, and material uncertainty while continuing unaffected work.
+- **Reviewer:** independently inspects the actual deliverable and evidence against the same requirements, ties findings to a version and method, distinguishes blocking from nonblocking findings, and recommends repairs or next work. The reviewer must not edit the deliverable and then call approval of those changes independent.
+
+This framework applies to technical and nontechnical work. The actual task and relevant specialist skills determine domain standards, tools, and deliverables. It requires no particular repository, experiment, technology, code tests, or document structure. Follow the user's choice of agents, people, or self-execution.
 
 ## Establish the Task Contract
 
-Identify the user's intended outcome, existing authorization, constraints, inputs, and definition of done. Read applicable briefs, plans, standards, prior decisions, and evidence. Do not demand unrelated policies or invent missing approval gates.
+Identify the intended outcome, existing authorization, constraints, inputs, and definition of done from applicable instructions and evidence. Do not invent missing approval gates or guess authority from filenames.
 
-For substantial work, maintain a compact coordinator-owned plan in an appropriate durable location. If no storage is available, keep an explicit task record in the conversation and state its persistence limits. The plan should contain:
+For substantial work, keep one compact, coordinator-owned plan or existing task record covering the objective and non-goals, authoritative references, facts and assumptions, deliverables and dependencies, owners where needed, acceptance evidence, authorization boundaries, and remaining work. Use durable storage when available; otherwise state the persistence limits of a conversational record. Small tasks need only their deliverable and brief result.
 
-1. Objective and non-goals.
-2. Authoritative instructions and input references.
-3. Known facts, assumptions, and unresolved questions.
-4. Deliverables, dependencies, owners, and acceptance criteria.
-5. Suitable verification methods and evidence requirements.
-6. Authorization boundaries and conditions for pausing.
-7. Remaining authorized work and closure criteria.
+No role may expand the objective or invent a new route beyond authorization. Resolve routine implementation choices within scope. If a material requirement is unclear, pause only dependent work and first resolve it from existing instructions before asking the user.
 
-An existing roadmap or mainline may serve as this plan, but one is not a prerequisite for every task. Record its exact reference and precedence when applicable; do not guess authority from filenames.
+A meaningful phase has one primary outcome and clear acceptance criteria. Avoid vague assignments and artificial micro-phases that merely rename unfinished work. Keep unresolved requirements visible until met or explicitly revised within authorization. A service's `completed` label, preliminary analysis, or narrow passing check proves only what its evidence covers.
 
-No role may invent a new route or expand the objective beyond existing authorization. Resolve routine implementation choices within scope. When a material requirement is unclear, pause only dependent work and ask the coordinator to resolve it from the existing instructions before requesting user input.
+## Collaboration Loop for Delegated or Independently Reviewed Deliverables
 
-## Role Responsibilities
+Apply this loop to meaningful deliverables, **not every action**. Self-checked work does not require a reviewer verdict, dispatch acknowledgement, or separate acceptance file.
 
-### Coordinator
-
-- Define bounded outcomes with enough scope to deliver something verifiable.
-- Assign the executor the relevant inputs, constraints, ownership, acceptance criteria, and expected evidence.
-- Give the reviewer the same task contract and a clear review brief.
-- Confirm assignments were accepted; retain ownership through execution, review, repair, and closure.
-- Monitor actual task state and keep the user informed without pressuring workers for premature conclusions.
-- Inspect delivered evidence, assess review conditions, and decide to continue, repair, pause, or close.
-- Preserve the whole authorized objective. Finishing a subtask does not cancel remaining required work; equally, do not invent additional work after the user's objective is met.
-
-### Executor
-
-- Understand the assigned outcome and relevant requirements before acting.
-- Work within the assignment, avoid unrelated changes, and preserve others' work.
-- Collect suitable evidence and perform the required verification.
-- Report what is complete, incomplete, changed, uncertain, or blocked.
-- Raise material uncertainty promptly while continuing unaffected authorized work.
-- Do not substitute a plan or limitation note for a requested deliverable, or shorten verification to satisfy a coordinator message deadline.
-
-### Reviewer
-
-- Inspect the actual deliverable and supporting evidence, not just the executor's summary.
-- Check requirements, completeness, correctness, boundary cases, and the limits of the evidence as appropriate to the task.
-- Tie findings to the reviewed deliverable version and the method used to check it.
-- Classify blocking and nonblocking findings; state missing evidence and recommended repairs.
-- Return a verdict with its exact scope and conditions. The coordinator owns routing decisions.
-- Retain independent judgment; do not soften findings merely to accelerate progress.
-- Do not change the deliverable being reviewed and then call approval of those changes independent.
-
-## Phase Size and Completion
-
-A useful phase has one primary outcome, defined ownership, explicit requirements, a deliverable, and a reviewable acceptance decision. It may cover a document section, a reconciled dataset, a design decision, a working feature, or another task-appropriate unit.
-
-Avoid both vague assignments such as “finish everything” and artificial micro-phases that only rename or document unfinished work. Keep unresolved criteria within the current phase until fulfilled or explicitly revised within authorization.
-
-Interpret service states such as `completed` according to the host's documented semantics. A terminal service state alone does not establish that the task's acceptance criteria were met. A preliminary analysis or passing narrow check proves only the scope it actually covers.
-
-## Monitoring Without Deadline Pressure
-
-Read [Monitoring and decision examples](references/monitoring-and-decisions.md) when managing a live task or recovering stalled work.
-
-Agree on evidence milestones and a reasonable silence window at dispatch. A milestone is a natural deliverable or checkpoint, not a demand to finish in the next message. Completion depends on acceptance criteria, not a coordinator reply deadline. Context pressure calls for a truthful handoff, not omitted verification.
-
-Separate three cadences:
-
-- **User updates:** provide concise commentary at the host's required interval (normally within 60 seconds during active work) and on material events. Explain verified progress, uncertainty, current judgment, and the next decision. Updating the user does not require another message to a worker.
-- **Passive monitoring:** use available status, mailbox, deliverables, logs, and resource information when relevant. Wait between checks; avoid busy polling. Use bounded waits so the user can steer ongoing work.
-- **Worker contact:** send new evidence, user steering, a scope correction, a genuine dependency, or one targeted liveness inquiry after an agreed checkpoint is missed. Do not repeatedly demand final reports, reduced verification, or a quick PASS.
-
-Quiet output is not proof of a hang. Reasoning, reading, and editing may produce no visible process or new file. Conversely, a PID, `running` label, timestamp, or unrelated successful check does not prove substantive progress. Correlate status with relevant evidence over time. Do not start irrelevant activity merely to display progress.
-
-When an inquiry is pending, allow a reasonable response window and do useful independent work. Intervene immediately for user steering, a verified safety/resource problem, unauthorized scope drift, or conflicting work. Document the reason. Resource limits protect the working environment; they are not delivery deadlines.
-
-## Dispatch-to-Closure Loop
+1. Dispatch a bounded outcome with relevant inputs and versions, constraints, owned scope, acceptance criteria, expected evidence, and a natural checkpoint. Verify that delegated work was accepted; do not describe rejected work as running.
+2. Monitor relevant evidence and incorporate user steering. If no worker is active, resume/reassign required work or use authorized fallback; never wait for nonexistent output.
+3. Inspect the actual completed deliverable and retain unmet criteria. Do not substitute a progress note for the requested result.
+4. When required, review a stable version. A reviewer may prepare earlier but cannot approve unseen later work. Prevent conflicting edits and recheck changes by their impact.
+5. Route findings by cause: `FAIL_NEEDS_REPAIR` requires correction; `HOLD` may mean repair, missing verification, an external input, or a user decision; assess each condition in `PASS_WITH_CONDITIONS`; `PASS` supports only the reviewed scope/version. Do not rework correct deliverables while waiting for external approval.
+6. Continue executable authorized work until the whole objective is satisfied or a genuine decision boundary requires yielding.
 
 ### Coordinator session lifetime
 
-Treat the coordinator session as open for the entire authorized objective. A worker's `PASS`, `PASS_WITH_CONDITIONS`, `HOLD`, `FAIL_NEEDS_REPAIR`, `STOP`, `complete`, or `idle` message is an event about that worker or reviewed version; it is never, by itself, an instruction to end the coordinator session. Translate the event into a decision, update the phase record, and inspect the remaining acceptance checklist.
+A worker's verdict or terminal state is an event, not an instruction to end the coordinator session. After a material event, check which mandatory deliverables, dependencies, repairs, and reviews remain and what can execute next. A `STOP` may refer to one attempt, one phase, or the whole objective; determine its scope and authority before acting. A partial `PASS` does not close the overall task.
 
-After every worker or reviewer event, perform this continuation check:
+Keep one authoritative status and evidence entry per substantive phase. Update it at meaningful transitions with the owner, state, relevant observation time, evidence, open findings, and next action. States such as `executing`, `awaiting_review`, `repair_required`, `verified`, or `blocked_external` can help; no fixed state schema or separate state file is mandatory. Routine polls and user updates need no new reports or approval records.
 
-1. Is the assigned deliverable present and reviewed at a named version?
-2. Which mandatory criteria, dependencies, repairs, and reviews remain open?
-3. Is there an active worker, a resumable process, a safe reassignment, or an authorized self-review path for the next item?
-4. Is the overall objective complete, or is there a genuine external/user decision boundary?
+Before the final answer, reconcile the whole authorized scope with verified evidence and remaining work. Attempt ordinary authorized repairs and alternatives first. End on completion, explicit user pause/handoff, or a genuine authorization, user-decision, or external dependency boundary. If the host forces interruption, preserve a truthful handoff; do not invent a session time limit or promise unverified background monitoring.
 
-If required work remains executable, continue monitoring and dispatch the next action in the same turn. If a worker says `STOP`, determine whether it means “stop this attempt,” “stop this phase,” or “stop the whole objective”; only the last can close the objective, and only when it is authorized and evidenced. End the coordinator session only after the Closure conditions below are satisfied, or when the Unexpected Events section requires yielding to the user. Do not emit a final completion report merely because the latest event says `PASS` or `HOLD`.
+### Agent lifecycle and fallback
 
-Keep a compact phase record: objective, current owner, state, last observation time, evidence references, open findings, and next action. Update it at meaningful transitions; routine polls need not generate new documents.
+Use only capabilities and status semantics the host actually exposes. If agents, waits, progress channels, or persistent execution are unavailable, use supported equivalents and state material limitations.
 
-Use explicit states such as `ready`, `executing`, `awaiting_review`, `reviewing`, `repair_required`, `verified`, `awaiting_user`, `blocked_external`, and `closed`. These states differ from service status and review verdicts.
+Prefer reusing a suitable existing worker through a tool that starts a new turn; a plain message may not resume an idle agent. Interrupting activity does not imply thread deletion or slot reclamation. Use close/release only if available and verify its result. For thread-limit failures, try reuse or authorized fallback rather than spinning on unchanged errors. Continue independent work when a real dependency remains blocked.
 
-1. Dispatch a bounded outcome and confirm acceptance. Do not report rejected work as running.
-2. Monitor, communicate, and incorporate user steering during execution. If no relevant worker exists, resume/reassign work or use authorized fallback; do not wait for nonexistent future output.
-3. On completion, inspect deliverables against acceptance criteria and retain unmet items.
-4. Review a stable version. The reviewer may prepare while execution proceeds but cannot approve unseen later work. Avoid conflicting edits and re-review affected evidence after changes.
-5. Route by finding and dependency: `FAIL_NEEDS_REPAIR` means correct the defect; `HOLD` requires identifying whether the need is repair, missing verification, external input, or a user decision; `PASS_WITH_CONDITIONS` requires assessing each condition; `PASS` permits the next authorized dependency. Do not redo correct work while waiting for an external approval. None automatically closes the overall objective.
-6. Continue while required work remains executable. When continuation is authorized, dispatches and phase results belong in progress messages, not premature final answers.
+## Monitoring and Context Economy
 
-Before a final answer, reconcile the whole authorized scope with verified evidence and outstanding tasks. End on completion, explicit user pause/handoff, a material unexpected event requiring user judgment, or a genuine confirmation/authorization/external dependency. Attempt routine authorized repairs and alternatives first.
+Read [Monitoring and decision examples](references/monitoring-and-decisions.md) only when managing delegated work, recovering a stall, or needing an optional report example.
 
-If the host actually forces interruption, preserve a truthful handoff. Do not invent a time-window limit or promise monitoring after the turn ends without a verified persistent monitor.
+Agree on natural evidence milestones and a reasonable silence window for delegated work. Completion depends on acceptance criteria, not a coordinator reply deadline. Context pressure calls for a truthful handoff, not omitted verification.
 
-### Agent Lifecycle and Fallback
+- **User updates:** follow host requirements and report material progress, uncertainty, and the next action. A user update does not require polling or messaging every agent.
+- **Passive monitoring:** use relevant status, mailbox, artifacts, logs, and resource information. Avoid busy polling; use bounded waits that allow user steering.
+- **Worker contact:** send new evidence, user steering, a scope correction, a real dependency, or one targeted inquiry after a missed checkpoint. Allow a reasonable response window while doing independent work. Do not demand premature reports or a quick `PASS`.
 
-Use only capabilities the host actually exposes. If it has no agents, progress channel, wait operation, or persistent execution, use the available equivalent and state the limitation. Do not invent tool names or promise unattended monitoring. Host and user instructions take precedence over example cadences in this skill.
+Quiet output or absence of a PID is not proof of a hang; a running label or timestamp is not proof of progress. Correlate relevant evidence over time. Intervene for user steering, verified safety/resource problems, unauthorized scope drift, or conflicting work, and record the reason. Resource limits protect the environment; they are not invented delivery deadlines.
 
-When agents are used, prefer reusing suitable existing workers through a tool that actually starts a new turn. A plain message may not resume an idle agent. `interrupt` stops activity; it does not imply thread deletion or slot reclamation. Use close/release only if available and verify the result.
+Send the minimum sufficient task packet, then changed facts, evidence references, and open findings. Do not fork full history by default. Preserve access to original evidence; summaries do not replace it. Reuse unchanged instructions, read references only when relevant, and limit tool output to what informs the decision. Preserve full logs when actually required.
 
-A thread-limit error does not establish why resources were not reclaimed. Try reuse rather than repeatedly spawning or interrupting completed agents. If it also fails, apply the user's authorized fallback or report the actual external dependency while continuing independent work. Do not spin on unchanged errors.
+When cost matters, inspect available usage at meaningful checkpoints and reassess duplication or task boundaries. Do not impose arbitrary report lengths or drop acceptance criteria to save tokens. Word counts are not exact billing-token measurements.
 
-Label author-reviewed work **self-review**, never “independent self-review.” Changing role names or making a second pass does not satisfy independent approval. Any final acceptance or external use follows the task's actual requirements; this skill invents no domain-specific eligibility rules.
+## Evidence Integrity and Proportionate Verification
 
-## Context and Token Economy
+Acceptance criteria are requirements to verify, not obstacles to disable. Investigate failures using actual inputs and outputs. Do not delete required checks, invent defaults, hide failures or scientific negative results, or relabel incomplete work to obtain a positive verdict. Preserve meaningful failure history and provenance. Correcting a genuinely mistaken requirement needs justification within authorization and evidence that the revised check distinguishes valid from invalid outcomes.
 
-Reduce repeated transmission and redundant work, not necessary evidence or verification:
+Before adding a check, identify the specific error it could detect, the requirement it protects, and the deliverable affected by failure. A sentence or internal judgment is enough; do not create a document for every check. Prefer existing evidence and mature tools. Checks without a concrete risk or acceptance purpose do not become mandatory workflow.
 
-- Dispatch a **minimum sufficient task packet**: outcome, authorization/constraints, acceptance criteria, input versions and references, owned scope, open findings, expected deliverable and checkpoint. Do not fork the full conversation by default.
-- Keep one authoritative task/phase record. After the first packet, send only changed facts, new evidence and unresolved findings. Preserve access to original sources; a summary is not a substitute for review evidence.
-- Read references and specialist instructions only when relevant to the current role. Reuse already-read, unchanged instructions; re-read when their version or applicability changes.
-- Prefer event notifications and targeted status checks. Limit tool output to the evidence needed for the current decision, while preserving complete logs in durable storage when required.
-- Re-review changed work, previous blocking findings and affected dependencies. Expand the review when shared inputs, interfaces, assumptions or uncertain impact invalidate prior evidence. Do not blindly repeat all checks, and do not use “diff only” to skip cross-cutting requirements.
-- Track available token/call/time usage at meaningful checkpoints when cost matters. Treat a worsening budget trend as a reason to reassess duplication, task split or approach. If completion requires a new budget or scope decision, consult the user; never silently drop acceptance criteria or manufacture completion.
+Fit verification to the work: source checks for claims, reconciliation for calculations, factual accuracy and usability for documents, feasibility for plans, functional tests for software. Do not write code tests merely to satisfy a documentation formality. A successful exit or confident summary alone is insufficient.
 
-Do not impose fixed short report limits that hide uncertainty, eliminate required independent review, or cap repair attempts merely to save tokens. Actual savings and quality must be measured together; byte or word counts are not exact billing-token counts.
+Bind evidence to the relevant input, implementation, and output versions. After a fix, recheck the change, prior blockers, and affected dependencies; unaffected evidence remains valid. Expand verification when shared semantics, inputs, interfaces, assumptions, or uncertain impact invalidate earlier evidence. For example:
 
-## Evidence Integrity
+- Document formatting: check the document; do not rerun experiments.
+- Additional result-table fields: verify the fields and table consistency; unchanged calculations need no new compute run.
+- Result-calculation logic: recompute affected results and review that logic.
+- Recompression of unchanged files: verify archive members and contents; scientific conclusions need no new review.
+- Shared execution semantics: check all affected tasks, even if only one source file changed.
 
-Acceptance criteria are requirements to verify, not obstacles to disable. Investigate failed checks using actual inputs and outputs. Do not remove required checks, insert unsupported defaults, hide errors, or relabel incomplete deliverables merely to obtain a positive verdict. A genuinely incorrect requirement needs a justified correction within authorization and evidence that the new check distinguishes valid from invalid outcomes.
+Adding a status file or review report does not automatically trigger full tests or experiments. Claims must match the scope and conditions of the evidence. Distinguish observations from assumptions, estimates from measurements, and findings from recommendations. Mark invalidated evidence superseded in the existing record and inform the user of material changes.
 
-Choose verification that fits the work: source checking for factual claims, reconciliation for calculations, coverage and consistency checks for documents, feasibility checks for plans, functional tests for software, or other relevant methods. Do not require code tests for non-code tasks. A tool's successful exit or an executor's confidence is not sufficient evidence on its own.
+### Dependency scope and environment migration
 
-The evidence must match the claim's scope and conditions. Do not generalize a narrow sample or isolated component result into complete success. Distinguish observations from assumptions, estimates from measurements, and verified findings from recommendations. Record meaningful limitations.
+Let the current delivery promise define required inputs, source, results, and evidence. Discover dependencies recursively when needed, but historical references do not automatically become current runtime dependencies. Repair missing necessary dependencies; accurately disclose missing historical material without claiming completeness. Never exclude a necessary current input merely by calling it historical.
 
-If later findings invalidate earlier acceptance claims, mark affected evidence superseded/invalid in the task record and inform the user. Preserve provenance; do not silently reuse stale proof.
+Distinguish conditions that affect behavior, environment identities worth recording, and identities explicitly required to match. For migration to an environment meeting the necessary conditions, reuse existing inputs and configuration and verify what changed. Do not invent universal UUID, hostname, or absolute-path equality requirements. If such identity binding is necessary, explain its technical reason and applicable requirement. Hardware and topology constraints come from the task, not this workflow.
 
-## Repeated Repairs and Alignment Review
+## Repeated Repairs and Workflow Rework
 
-Repeated repairs are a signal to reassess the diagnosis and direction, not a reason to pressure workers, weaken acceptance criteria, or automatically abandon the task. Count substantive repair attempts against the same outcome, not messages or minor edits. Renaming a phase does not reset its unresolved findings.
+Reassess when the same blocker survives substantive repairs, progress stops converging, or evidence contradicts the approach. Retry limits and checkpoints come from the task contract; this template adds no fixed attempt cap or automatic stop quota. Renaming a phase does not erase unresolved findings.
 
-Unless the task specifies different checkpoints, reassess when the same blocking finding survives two completed repair-and-review cycles, or a phase reaches three substantive repair cycles. These are default diagnostic triggers, not delivery deadlines or a maximum number of attempts. Reassess sooner if new evidence contradicts the plan; explain a different cadence when the task calls for it.
+Check whether the work still serves the authorized objective, whether the diagnosis explains the evidence, whether acceptance targets have shifted, whether dependencies or conflicting work caused the problem, and whether cost or risk exceeds agreed bounds. Record the diagnosis and next executable action in the existing task record. Continue credible in-scope corrections without redundant authorization.
 
-Before another repair, compare the current outcome and approach with the authoritative task plan. Check:
+Also inspect the workflow itself: waiting for roles, repeatedly reading the same evidence, repeated packaging, and chasing irrelevant historical dependencies can create avoidable rework. Fix boundaries and dependency order without weakening acceptance. Catching a workflow-induced defect is necessary repair, not proof that every added process step was beneficial. Do not claim precise savings without measurements.
 
-- Does the work still serve the user's objective and stay within authorized scope?
-- Is the root cause supported by evidence, or are repairs only addressing symptoms?
-- Are requirements and review findings consistent, or has the acceptance target been moving?
-- Do successive attempts show measurable progress, or repeat the same failure?
-- Is the phase poorly bounded, missing a dependency, or affected by conflicting work?
-- Are further changes increasing cost, complexity, or risk beyond the agreed limits?
-
-Record the diagnosis, evidence, revised next action, and next verification checkpoint in the phase record; share the material conclusion with the user. For an in-scope correction with a credible path forward, adjust the approach or assignment and continue without asking for redundant authorization. Useful progress can justify further repair cycles.
-
-If reassessment finds a material departure from the agreed objective, requires new authorization or changed constraints/commitments, or repeated evidence leaves no credible in-scope path, safely pause affected work and yield for user judgment under the next section. Explain what has been tried, what was learned, the unresolved assumption, and the choices requiring a decision. Do not ask merely because a counter reached a threshold, and do not keep repeating an ineffective repair to avoid admitting a dead end.
+If evidence shows no credible in-scope path, or a remedy requires changed objectives, constraints, costs, or authorization, pause affected work and present a concrete decision. Do not repeat ineffective repairs merely to avoid acknowledging a dead end.
 
 ## Unexpected Events and User Decisions
 
-When a material unexpected event falls outside the agreed repair/risk envelope, or a next action genuinely needs user confirmation or authorization, pause dependent work. Examples include possible loss of important information, conflicting authoritative instructions, new costs or commitments beyond agreed bounds, or findings requiring a substantive change of objective or approach.
+Pause dependent work when a material unexpected event falls outside the agreed repair/risk envelope or the next action genuinely needs new authorization. Examples include possible loss of important information, conflicting authoritative instructions, or new commitments beyond agreed bounds. Ordinary verification failures, expected repairs, worker silence, and complexity alone do not require renewed permission.
 
-Ordinary verification failures, anticipated repair cycles, normal worker silence, and complexity alone are not reasons to seek renewed permission.
-
-1. Bring affected work to a safe pause using the supported mechanisms. Preserve evidence and recoverable state. Verify and report what is paused or still active; state any inability to pause safely.
-2. Complete safe preparation needed for a concrete, reviewable proposal. Do not perform the dependent action first or rush workers to finish because a pause is required.
-3. Yield the turn with what happened, verified impact and uncertainty, a recommended next action, material alternatives, and the exact confirmation needed. Identify the restriction or explain why the event exceeds the agreed envelope.
-4. Wait for the user's explicit reply before resuming dependent actions. Time, silence, and default options are not approval. Existing authorization and preferences remain valid; do not ask again for covered actions.
-5. Record the user's decision and resume from the preserved state.
-
-At this boundary, ending the turn to consult the user is correct. Continuous execution does not authorize bypassing decisions the user must make.
-
-## Lightweight Report Templates
-
-Adapt length and medium to the task. Small tasks may combine these fields in short paragraphs; use a durable report for complex or long-running work. Do not create empty sections or additional approval gates just to fill a template.
-
-### Execution report
-
-- Assignment, requirements, and input references.
-- Deliverable and what changed.
-- Verification performed, evidence references, and reviewed version.
-- Acceptance criteria met and still unmet.
-- Issues, assumptions, deviations, and recommendation for review.
-
-### Review and next-work recommendation
-
-- Verdict: `PASS`, `PASS_WITH_CONDITIONS`, `HOLD`, `FAIL_NEEDS_REPAIR`, or `STOP`.
-- Reason and next action: defect repair, missing verification, external dependency, user decision, or next authorized work.
-- Reviewed scope/version and evidence checked.
-- Findings with severity, missing evidence, and limitations.
-- For each condition: owner, required verification, and whether it blocks dependent work.
-- Recommended repair or next authorized step; an actual user decision if necessary.
-
-A failing review should yield actionable findings, not a vague instruction to “try again.” Keep those findings in the existing phase record where practical.
+Preserve evidence and recoverable state; verify what is paused or still active. Complete safe preparation for a reviewable proposal, then explain the verified impact, uncertainty, recommended action, alternatives, and exact decision needed. Name the restriction or explain how the event exceeds the agreed scope. Await an explicit reply for dependent actions; elapsed time and silence are not approval. Existing authorization remains valid. Continue unaffected authorized work and resume dependent work from the preserved state after the decision.
 
 ## Closure and Handoff
 
-Close only when all mandatory criteria have verified evidence, blocking findings are resolved (or the user explicitly narrows the objective), and no required task or review remains unaccounted for. Nonblocking deferrals need a rationale, owner, and verification plan; they cannot hide unmet mandatory requirements.
+Close when all mandatory criteria have verified evidence, blockers are resolved (or the user explicitly narrows scope), and no required work or review is unaccounted for. Nonblocking deferrals need a rationale, owner, and verification plan; they cannot hide unmet requirements. State the completed work, evidence, limitations, and actual follow-up. Optional suggestions are not new mandatory tasks.
 
-The final report states completed work, evidence, remaining limitations or authorized deferrals, and any actual follow-up within the agreed scope. Do not turn optional suggestions into new mandatory tasks.
+### Archives and portable handoffs
 
-For handoff, record authoritative task references, remaining deliverables, accepted authorization, verified facts versus unverified claims, active workers and their last observed state, evidence versions, open findings, and the next executable action. On resumption, inspect the current state before acting; other workers may have changed it.
+Use this sequence only when the delivery includes an archive or portable handoff, with checks proportional to its promise:
 
-## Interaction With Domain Skills
+1. Define the current dependency scope and acceptance criteria; finish necessary checks and produce a stable delivery directory.
+2. For complex result handoffs, independently review content, critical mappings, and promised portability. If independent recomputation is promised, verify it from an isolated extraction without relying on the original workspace. Recheck repairs by impact.
+3. If a content review report must be included, add it before freezing the directory. Keep build logs, temporary files, and final archive acceptance receipts outside it. Prevent concurrent edits while archiving.
+4. Build the archive and check members, contents/hashes, and extraction usability as required. Repair real mismatches; fewer packaging rounds do not justify skipping acceptance.
+5. For complex result handoffs, produce a final archive acceptance receipt. Save any **final archive acceptance receipt outside the archive**, bound to its SHA-256, size, checked scope, and verdict. A simple compression task does not need a separate receipt unless required by its acceptance criteria. Do not reopen an accepted archive merely to include its own final receipt. A task-specific requirement to embed a report must use a clearly defined inner-content scope; verification of the final archive bytes remains external.
 
-Use this skill for coordination and an appropriate specialist skill for substance when helpful. Let the task determine standards, tools, verification, and deliverables. This framework does not dictate those choices or a fixed downstream workflow.
+For a simple compression task, member/content checks can suffice; do not automatically demand scientific recomputation or a portable-runtime audit.
+
+For handoff of ongoing work, preserve authoritative references, remaining deliverables, accepted authorization, verified facts versus claims, active owners and last observed state, evidence versions, open findings, and the next action. Inspect current state on resumption because others may have changed it.
+
+## Optional Report Examples
+
+Use the [report examples](references/monitoring-and-decisions.md#optional-report-examples) only when they help a real reader or handoff. They are not a checklist of files to create. Small tasks need a deliverable plus a brief result; substantial work can update its existing record. Never add empty sections, approval documents, or duplicate summaries to satisfy a template.

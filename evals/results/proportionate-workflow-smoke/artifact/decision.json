@@ -1,0 +1,12 @@
+{
+  "state": "blocked_external",
+  "external_release_ready": false,
+  "remaining_authorized_local_work": [],
+  "local_preparation_complete": true,
+  "approval_status": "pending",
+  "external_dependency": {
+    "owner": "procurement",
+    "required_evidence": "approval.json status must be approved before external release"
+  },
+  "verification": "self-review; no independent reviewer available"
+}

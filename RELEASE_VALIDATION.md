@@ -1,6 +1,26 @@
 # Release validation
 
-Status: v1.0.0 community release candidate with bounded validation. This is not a claim of broad platform certification.
+## v1.1.0 — 2026-10-04
+
+This revision makes direct execution the default for ordinary subtasks while preserving review requirements for critical deliverables. The maintainer checked coverage against the supplied optimization brief; an independent agent reviewed the runtime instructions without editing them.
+
+Executed checks:
+
+- `python scripts/validate_skill.py`: package structure, Markdown references, and 30 scenario definitions passed. Definitions are not executed behavioral tests.
+- Codex skill-creator `quick_validate.py`: skill metadata and structure passed.
+- `python scripts/test_trial_checker.py`: all 5 existing evidence-checker tests passed.
+- `python scripts/check_artifact_trial.py`: historical baseline/candidate artifacts still satisfy the checker; this is not a new old-version comparison.
+- `npx --yes skills add . --list`: the CLI discovered exactly one skill with the expected name. No npm package publication is required for GitHub-based installation.
+- One isolated worker completed a Chinese launch note and the existing purchase-summary exercise using the candidate. The maintainer inspected the note and independently recomputed the artifact checks: all items retained, total 670, inputs preserved, obsolete/empty success claims rejected, self-review labeled, and external approval left pending.
+- Independent read-only content review found no blocking issues. A scoped follow-up review found no blocking issues with exempting simple compression from unnecessary receipts and suggested making receipts explicit for complex result handoffs. That suggestion was adopted and checked by the maintainer; unaffected calculation trials were not rerun.
+
+Saved outputs and version fingerprints: [bounded smoke validation](evals/results/proportionate-workflow-smoke/validation.json), [launch note](evals/results/proportionate-workflow-smoke/launch/launch.md), [purchase summary](evals/results/proportionate-workflow-smoke/artifact/summary.md), [decision](evals/results/proportionate-workflow-smoke/artifact/decision.json), and [self-review](evals/results/proportionate-workflow-smoke/artifact/review.md). The purchase inputs are the unchanged files in `evals/fixtures/artifact-task/`.
+
+Limits: one worker and one trial per task; further delegation and external actions were disabled by the harness. These checks do not prove autonomous agent-count selection, portability, real environment migration, live agent recovery, broad reliability, or time/token savings. New scenario definitions remain unexecuted unless accompanied by a recorded trial. Historical failures and evidence are retained below.
+
+## Historical v1.0.0 validation
+
+The following records describe the original bounded release candidate, not new v1.1.0 trials.
 
 ## Executed
 
@@ -17,7 +37,7 @@ These runs are bounded smoke checks with one trial per variant, not a statistica
 
 The scenario definitions in `evals/evals.json` are separate from executed results. Definitions without a corresponding recorded trial remain untested.
 
-Completed for this bounded release candidate: controlled multi-event candidate exercise and independent final review. Remaining maturity evidence is listed below. No public deployment or external distribution has been performed.
+Completed for this bounded release candidate: controlled multi-event candidate exercise and independent final review. Remaining maturity evidence is listed below. That original validation did not itself perform public deployment or external distribution.
 
 ## Maturity limitations
 

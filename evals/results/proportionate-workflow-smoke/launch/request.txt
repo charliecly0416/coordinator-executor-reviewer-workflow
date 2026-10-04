@@ -1,0 +1,1 @@
+用 coordinator-executor-reviewer-workflow 根据 facts.md 整理一份简短中文启动说明，保存为 launch.md，供另一台已满足环境条件的服务器使用。
