@@ -12,8 +12,9 @@ Executed checks:
 - `python scripts/check_artifact_trial.py`: the saved baseline and candidate artifact outputs still satisfy their integrity checks.
 - `npx --yes skills add . --list`: the CLI discovered exactly one skill with the expected name.
 - The bounded launch-note and artifact smoke outputs from the previous release remain valid under the rewritten acceptance rules; the maintainer rechecked their commands, arithmetic, preserved inputs, pending approval, and self-review labels.
+- A fresh isolated smoke pass exercised the new closure rules: a Direct launch note closed after its short self-check with no extra artifacts, and an Assisted formatting repair closed after one targeted fix while an optional style suggestion remained out of scope.
 
-The runtime entry point is 119 lines and the monitoring reference is 39 lines. The expanded scenario definitions remain test specifications, not behavioral passes. No claim is made about statistical reliability, exact token savings, live agent recovery, or archive portability from this validation alone. A fresh behavioral trial should cover the new stop-after-acceptance and repair-triage cases before making such claims.
+The runtime entry point is 119 lines and the monitoring reference is 39 lines. The expanded scenario definitions remain test specifications, not behavioral passes. No claim is made about statistical reliability, exact token savings, live agent recovery, or archive portability from this validation alone. The isolated smoke pass is evidence of these two bounded cases, not a broad behavior or cost benchmark.
 
 ## Historical validation
 
